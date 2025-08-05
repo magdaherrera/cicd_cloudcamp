@@ -13,5 +13,7 @@ jobs:
         run: |
           ls
           pwd
-          
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform version
+
 
