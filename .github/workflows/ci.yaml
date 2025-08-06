@@ -6,6 +6,9 @@ on:
       should_deploy: 
         type: boolean
 
+      text_field:
+        type: string
+        
 jobs:
   hello_world:
     runs-on: ubuntu-latest
