@@ -7,9 +7,15 @@ on:
         type: boolean
 
       text_field:
+        name: Message
         type: string
         required: true
         default: test
+
+env: 
+  SHOULD_DEPLOY: ${{ github.event_name == 'push' && true || inputs.should_deploy }}
+  MESSAGE: ${{ github.event_name == 'push' && 'push_event' || inputs.text_field }}
+
 
 jobs:
   hello_world:
@@ -26,11 +32,11 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
       - run: terraform version
   job_depends:
-    if: ${{ inputs.should_deploy }}
+    if: ${{ env.SHOULD_DEPLOY == true }}
     runs-on: ubuntu-latest
     needs: [hello_world]
     steps: 
-      - run: echo "${{ github.actor }}"
+      - run: echo "${{ github.actor }} - $MESSAGE"
 
   terraform: 
     name: Terraform CI
