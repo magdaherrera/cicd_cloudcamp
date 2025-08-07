@@ -14,7 +14,11 @@ on:
 
 env: 
   SHOULD_DEPLOY: ${{ github.event_name == 'push' && true || inputs.should_deploy }}
-  MESSAGE: ${{ github.event_name == 'push' && 'push_event' || inputs.text_field }}
+  MESSAGE: >-
+    ${{ github.event_name == 'push' && 'push_event'
+        || github.event_name == 'pull_request' && 'pull_request'
+        || inputs.text_field
+    }}
 
 
 jobs:
