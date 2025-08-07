@@ -60,8 +60,9 @@ jobs:
       - name: terraform init
         run: terraform init
       - name: terraform plan
-        run: terraform plan
-
+        run: terraform plan -out tfplan
+      - name: "terraform apply :rocket:" 
+        run: terraform apply tfplan
 
 
 
