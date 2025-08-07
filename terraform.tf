@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "284698404434_magda_herrera"
+  bucket = "284698404434-magda-herrera"
 
   tags = {
     Owner  = "mh"
