@@ -36,11 +36,15 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
       - run: terraform version
   job_depends:
-   # if: ${{ env.SHOULD_DEPLOY == true }}
+    if: ${{ env.SHOULD_DEPLOY == 'true' }}
     runs-on: ubuntu-latest
     needs: [hello_world]
     steps: 
-      - run: echo "${{ github.actor }} - $MESSAGE"
+      - run: | 
+          echo "${{ github.actor }} - $MESSAGE"
+          if [[ "${{ env.SHOULD_DEPLOY }}" == "true" ]]; then 
+            echo "SHOULD DEPLOY"
+          fi
 
   terraform: 
     name: Terraform CI
